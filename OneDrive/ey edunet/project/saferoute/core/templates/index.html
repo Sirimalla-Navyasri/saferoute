@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .landing-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 100px 40px;
+        text-align: center;
+        border-radius: 12px;
+        margin-bottom: 60px;
+    }
+
+    .landing-hero h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .landing-hero p {
+        font-size: 18px;
+        opacity: 0.95;
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cta-buttons a {
+        padding: 15px 35px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+    .btn-primary-cta {
+        background: white;
+        color: #667eea;
+    }
+
+    .btn-primary-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn-secondary-cta {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .btn-secondary-cta:hover {
+        background: white;
+        color: #667eea;
+    }
+
+    .features-section {
+        margin-bottom: 60px;
+    }
+
+    .features-section h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 50px;
+        font-size: 36px;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .feature-box {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .feature-box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+
+    .feature-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .feature-box h3 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    .feature-box p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .why-saferoute {
+        background: #f8f9ff;
+        padding: 60px 40px;
+        border-radius: 12px;
+        margin-bottom: 60px;
+    }
+
+    .why-saferoute h2 {
+        color: #333;
+        margin-bottom: 40px;
+        font-size: 32px;
+    }
+
+    .why-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .why-item {
+        padding: 20px;
+    }
+
+    .why-item h4 {
+        color: #667eea;
+        margin-bottom: 12px;
+        font-size: 18px;
+    }
+
+    .why-item p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .stats-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .stat-number {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .testimonial-section {
+        margin-bottom: 60px;
+    }
+
+    .testimonial-section h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 40px;
+        font-size: 32px;
+    }
+
+    .testimonial-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .testimonial-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .testimonial-text {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.8;
+        font-style: italic;
+    }
+
+    .testimonial-author {
+        color: #667eea;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .testimonial-role {
+        color: #999;
+        font-size: 14px;
+    }
+
+    .cta-footer {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 40px;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .cta-footer h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .cta-footer p {
+        font-size: 16px;
+        margin-bottom: 30px;
+        opacity: 0.95;
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="landing-hero">
+    <h1>🛡️ Your Safety, Our Priority</h1>
+    <p>SafeRoute AI is an advanced women safety navigation system that combines AI-powered risk analysis, real-time location tracking, and instant emergency alerts to help you travel fearlessly.</p>
+    <div class="cta-buttons">
+        <a href="/register/" class="cta-buttons btn-primary-cta">Get Started Now</a>
+        <a href="/login/" class="cta-buttons btn-secondary-cta">Already a Member? Login</a>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section">
+    <h2>Powerful Features for Your Safety</h2>
+    <div class="features-grid">
+        <div class="feature-box">
+            <div class="feature-icon">🗺️</div>
+            <h3>Smart Route Planning</h3>
+            <p>AI analyzes crime data, lighting conditions, and historical incidents to suggest the safest route, not just the fastest.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">📍</div>
+            <h3>Live Location Sharing</h3>
+            <p>Share your real-time location with trusted contacts. Get instant alerts if you deviate from your planned route.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">🚨</div>
+            <h3>Emergency SOS</h3>
+            <p>One-tap emergency button sends your exact location and details to emergency contacts and local authorities.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">⏱️</div>
+            <h3>Safe Arrival Timer</h3>
+            <p>Set a timer for your journey. Auto-alert your guardians if you don't check in on time.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">🔔</div>
+            <h3>Community Alerts</h3>
+            <p>Get real-time alerts about incidents in your area from community members and verified sources.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-icon">📊</div>
+            <h3>Safety Analytics</h3>
+            <p>View detailed safety reports, travel history, and improve your awareness with data-driven insights.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Why SafeRoute -->
+<div class="why-saferoute">
+    <h2>Why Choose SafeRoute AI?</h2>
+    <div class="why-grid">
+        <div class="why-item">
+            <h4>✓ AI-Powered Safety</h4>
+            <p>Our advanced algorithms analyze multiple data sources to provide accurate risk assessments in real-time.</p>
+        </div>
+
+        <div class="why-item">
+            <h4>✓ 24/7 Protection</h4>
+            <p>Always connected and protected. Our system works round the clock to keep you safe.</p>
+        </div>
+
+        <div class="why-item">
+            <h4>✓ Easy to Use</h4>
+            <p>Simple, intuitive interface designed for quick access to critical safety features when you need them.</p>
+        </div>
+
+        <div class="why-item">
+            <h4>✓ Privacy First</h4>
+            <p>Your data is encrypted and protected. You control who can see your location and information.</p>
+        </div>
+
+        <div class="why-item">
+            <h4>✓ Community Driven</h4>
+            <p>Connect with other users, share safety tips, and build a supportive community.</p>
+        </div>
+
+        <div class="why-item">
+            <h4>✓ Emergency Ready</h4>
+            <p>Instant connection to emergency services and your trusted contacts in times of need.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<h2 style="text-align: center; color: #333; margin-bottom: 40px; font-size: 32px;">Trusted by Women Everywhere</h2>
+<div class="stats-section">
+    <div class="stat-card">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Active Users</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number">100K+</div>
+        <div class="stat-label">Safe Journeys</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label">Lives Protected</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Support Available</div>
+    </div>
+</div>
+
+<!-- Testimonials -->
+<div class="testimonial-section">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+        <div class="testimonial-card">
+            <div class="testimonial-text">"SafeRoute has completely changed how I commute. I feel so much safer knowing that my location is shared with my family and that help is just one tap away."</div>
+            <div class="testimonial-author">Priya Sharma</div>
+            <div class="testimonial-role">Student, Hyderabad</div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-text">"The smart route planning feature is incredible. It actually shows me safer paths that I wouldn't have thought of. Highly recommend!"</div>
+            <div class="testimonial-author">Anjali Mehta</div>
+            <div class="testimonial-role">Professional, Mumbai</div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-text">"As a parent, this app gives me peace of mind. I can track my daughter's location and know she's safe. This is the future of women's safety."</div>
+            <div class="testimonial-author">Rajesh Kumar</div>
+            <div class="testimonial-role">Parent, Bangalore</div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Footer -->
+<div class="cta-footer">
+    <h2>Ready to Take Control of Your Safety?</h2>
+    <p>Join thousands of women who are already using SafeRoute AI to travel safely and confidently.</p>
+    <div class="cta-buttons">
+        <a href="/register/" class="cta-buttons btn-primary-cta">Sign Up Today</a>
+        <a href="/login/" class="cta-buttons btn-secondary-cta">Existing Users Login</a>
+    </div>
+</div>
+
+{% endblock %}

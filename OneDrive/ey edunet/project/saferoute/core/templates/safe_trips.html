@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .dashboard-nav {
+        background: white;
+        border-bottom: 2px solid #f0f0f0;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .dashboard-nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dashboard-nav li {
+        flex: 1;
+    }
+
+    .dashboard-nav a {
+        display: block;
+        padding: 16px 20px;
+        text-decoration: none;
+        color: #333;
+        text-align: center;
+        font-weight: 600;
+        transition: all 0.3s;
+        border-bottom: 3px solid transparent;
+    }
+
+    .dashboard-nav a:hover {
+        background: #f8f9ff;
+        color: #5f2eea;
+        border-bottom-color: #5f2eea;
+    }
+
+    .dashboard-nav a.active {
+        color: #5f2eea;
+        border-bottom-color: #5f2eea;
+        background: #f8f9ff;
+    }
+
+    .page-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, #5f2eea 0%, #8e2de2 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+    }
+
+    .page-header h1 {
+        font-size: 36px;
+        margin: 0 0 10px 0;
+    }
+
+    .page-header p {
+        opacity: 0.95;
+        margin: 0;
+    }
+
+    .trip-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+        transition: all 0.3s;
+    }
+
+    .trip-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(95, 46, 234, 0.15);
+    }
+
+    .trip-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 15px;
+    }
+
+    .trip-route {
+        font-weight: 600;
+        color: #333;
+        font-size: 18px;
+    }
+
+    .trip-status {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .status-completed {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-active {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .trip-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .trip-detail-item {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .trip-detail-item strong {
+        color: #333;
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .trip-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-view {
+        background: #5f2eea;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .btn-view:hover {
+        background: #4a1ca8;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 40px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .empty-icon {
+        font-size: 64px;
+        margin-bottom: 20px;
+    }
+
+    .empty-state h2 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: #999;
+        margin-bottom: 20px;
+    }
+
+    .btn-start-trip {
+        background: #5f2eea;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-start-trip:hover {
+        background: #4a1ca8;
+    }
+</style>
+
+<!-- Dashboard Navigation -->
+<div class="dashboard-nav">
+    <ul>
+        <li><a href="/dashboard/">📊 Dashboard</a></li>
+        <li><a href="/safe-trips/" class="active">🛣️ Safe Trips</a></li>
+        <li><a href="/safety-points/">⭐ Safety Points</a></li>
+        <li><a href="/profile/">👤 Profile</a></li>
+    </ul>
+</div>
+
+<div class="page-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>🛣️ Safe Trips</h1>
+        <p>View and manage all your journeys. Track your routes, safety scores, and trip history.</p>
+    </div>
+
+    <!-- Trip List -->
+    <div>
+        <!-- Active Trip -->
+        <div class="trip-card">
+            <div class="trip-header">
+                <div class="trip-route">Hyderabad Central → Corporate Office</div>
+                <span class="trip-status status-active">🔴 Active</span>
+            </div>
+
+            <div class="trip-details">
+                <div class="trip-detail-item">
+                    <strong>📅 Date</strong>
+                    Today, 9:30 AM
+                </div>
+                <div class="trip-detail-item">
+                    <strong>⏱️ Duration</strong>
+                    45 minutes
+                </div>
+                <div class="trip-detail-item">
+                    <strong>📍 Distance</strong>
+                    15.5 km
+                </div>
+                <div class="trip-detail-item">
+                    <strong>🎯 Safety Score</strong>
+                    92%
+                </div>
+            </div>
+
+            <div class="trip-actions">
+                <button class="btn-view">View Details</button>
+                <button class="btn-view" style="background: #ff6b6b;">End Trip</button>
+            </div>
+        </div>
+
+        <!-- Past Trip 1 -->
+        <div class="trip-card">
+            <div class="trip-header">
+                <div class="trip-route">Mall → Home</div>
+                <span class="trip-status status-completed">✓ Completed</span>
+            </div>
+
+            <div class="trip-details">
+                <div class="trip-detail-item">
+                    <strong>📅 Date</strong>
+                    Yesterday, 6:15 PM
+                </div>
+                <div class="trip-detail-item">
+                    <strong>⏱️ Duration</strong>
+                    30 minutes
+                </div>
+                <div class="trip-detail-item">
+                    <strong>📍 Distance</strong>
+                    8.2 km
+                </div>
+                <div class="trip-detail-item">
+                    <strong>🎯 Safety Score</strong>
+                    87%
+                </div>
+            </div>
+
+            <div class="trip-actions">
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+
+        <!-- Past Trip 2 -->
+        <div class="trip-card">
+            <div class="trip-header">
+                <div class="trip-route">Home → Gym</div>
+                <span class="trip-status status-completed">✓ Completed</span>
+            </div>
+
+            <div class="trip-details">
+                <div class="trip-detail-item">
+                    <strong>📅 Date</strong>
+                    Feb 11, 6:00 AM
+                </div>
+                <div class="trip-detail-item">
+                    <strong>⏱️ Duration</strong>
+                    20 minutes
+                </div>
+                <div class="trip-detail-item">
+                    <strong>📍 Distance</strong>
+                    5.8 km
+                </div>
+                <div class="trip-detail-item">
+                    <strong>🎯 Safety Score</strong>
+                    95%
+                </div>
+            </div>
+
+            <div class="trip-actions">
+                <button class="btn-view">View Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

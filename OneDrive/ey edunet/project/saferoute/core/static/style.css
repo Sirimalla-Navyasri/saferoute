@@ -1,0 +1,206 @@
+/* ================= GLOBAL ================= */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: #f6f6fb;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.navbar a {
+    margin-left: 25px;
+    color: #333;
+    font-weight: 500;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #5b4bff;
+}
+
+/* ================= TOP & BOTTOM STRIPS ================= */
+
+.top-strip,
+.bottom-strip {
+    height: 80px;
+    background: #2e3f7f;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hero-card {
+    background: #f3f4ff;
+    padding: 50px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.hero-title {
+    color: #6a5af9;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.hero-text {
+    color: #555;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+/* ================= FEATURE CARDS ================= */
+
+.feature-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+    transition: 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.alert-card {
+    background: #ffecec;
+}
+
+.emergency-card {
+    background: #fff4d6;
+}
+
+/* ================= FORMS (Login & Register) ================= */
+
+.login-card,
+.signup-card {
+    background: #f3f4ff;
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.form-card input,
+.login-card input,
+.signup-card input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+.form-card input:focus,
+.login-card input:focus,
+.signup-card input:focus {
+    border-color: #6a5af9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(106,90,249,0.3);
+}
+
+/* ================= BUTTONS ================= */
+
+.btn-gradient {
+    background: linear-gradient(90deg, #6a5af9, #8f6bff);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.btn-gradient:hover {
+    opacity: 0.9;
+}
+
+.primary-btn {
+    background: linear-gradient(90deg, #6a5af9, #8f6bff);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.outline-btn {
+    border: 2px solid #6a5af9;
+    color: #6a5af9;
+    padding: 10px 22px;
+    border-radius: 8px;
+}
+
+.outline-btn:hover {
+    background: #6a5af9;
+    color: white;
+}
+
+/* ================= SOS BUTTON ================= */
+
+.sos-btn {
+    position: absolute;
+    right: 25px;
+    bottom: -20px;
+    background: red;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    font-size: 14px;
+    background: white;
+    color: #444;
+    padding: 40px 60px;
+    margin-top: 60px;
+    border-top: 1px solid #eee;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-content h6 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* ================= PAGE TITLE ================= */
+
+.page-title {
+    font-weight: bold;
+    font-size: 40px;
+    text-decoration: underline;
+    margin-bottom: 30px;
+}

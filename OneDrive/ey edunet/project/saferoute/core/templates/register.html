@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg p-4 signup-card">
+
+            <h3 class="text-center mb-4">Sign Up</h3>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" required>
+                    <small class="form-text text-muted">
+                        Required. 150 characters or fewer.
+                        Letters, digits and @/./+/-/_ only.
+                    </small>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password1" class="form-control" required>
+
+                    <ul class="password-hints">
+                        <li>Your password can’t be too similar to your personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can’t be a commonly used password.</li>
+                        <li>Your password can’t be entirely numeric.</li>
+                    </ul>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                    <label class="form-label">Password confirmation</label>
+                    <input type="password" name="password2" class="form-control" required>
+                    <small class="form-text text-muted">
+                        Enter the same password as before, for verification.
+                    </small>
+                </div>
+
+                <!-- Full Name -->
+                <div class="mb-3">
+                    <label class="form-label">Full name</label>
+                    <input type="text" name="fullname" class="form-control">
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-3">
+                    <label class="form-label">Phone number</label>
+                    <input type="text" name="phone" class="form-control">
+                </div>
+
+                <!-- Register Button -->
+                <button type="submit" class="btn btn-primary w-100" style="background: linear-gradient(90deg, #6a11cb, #2575fc); border: none;">
+                    Register
+                </button>
+
+            </form>
+
+            <p class="text-center mt-3">
+                Already have an account?
+                <a href="/login/">Login here</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

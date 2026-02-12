@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .sos-container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .sos-warning {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+        padding: 60px 40px;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    }
+
+    .sos-icon {
+        font-size: 80px;
+        margin-bottom: 20px;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .sos-warning h1 {
+        font-size: 42px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .sos-warning p {
+        font-size: 18px;
+        opacity: 0.95;
+        margin-bottom: 10px;
+    }
+
+    .emergency-contacts {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        margin-bottom: 40px;
+    }
+
+    .emergency-contacts h2 {
+        color: #ff6b6b;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    .contact-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 10px;
+    }
+
+    .contact-row:last-child {
+        border-bottom: none;
+    }
+
+    .contact-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .contact-number {
+        color: #ff6b6b;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .sos-form-section {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        margin-bottom: 40px;
+    }
+
+    .sos-form-section h2 {
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #ff6b6b;
+        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .sos-button-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn-sos-send {
+        flex: 1;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        color: white;
+        padding: 16px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    .btn-sos-send:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    }
+
+    .btn-sos-send:active {
+        transform: translateY(0);
+    }
+
+    .btn-back {
+        flex: 1;
+        background: #f0f0f0;
+        color: #333;
+        padding: 16px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+    }
+
+    .btn-back:hover {
+        background: #e0e0e0;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .success-message {
+        background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        font-size: 16px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .info-box {
+        background: #f8f9ff;
+        border-left: 4px solid #ff6b6b;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+
+    .info-box p {
+        color: #666;
+        margin: 0;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="sos-container">
+
+    <!-- SOS Warning Header -->
+    <div class="sos-warning">
+        <div class="sos-icon">🚨</div>
+        <h1>Emergency SOS</h1>
+        <p>Your safety is our top priority</p>
+        <p style="opacity: 0.8; font-size: 14px;">Activate this only in case of emergency</p>
+    </div>
+
+    <!-- Success Message -->
+    {% if message %}
+    <div class="success-message">
+        ✓ {{ message }}
+    </div>
+    {% endif %}
+
+    <!-- Emergency Contacts -->
+    <div class="emergency-contacts">
+        <h2>📞 Emergency Contacts</h2>
+        
+        <div class="contact-row">
+            <span class="contact-name">Police Emergency</span>
+            <span class="contact-number">100</span>
+        </div>
+
+        <div class="contact-row">
+            <span class="contact-name">Women Helpline</span>
+            <span class="contact-number">1091</span>
+        </div>
+
+        <div class="contact-row">
+            <span class="contact-name">Ambulance</span>
+            <span class="contact-number">102</span>
+        </div>
+
+        <div class="contact-row">
+            <span class="contact-name">Fire Department</span>
+            <span class="contact-number">101</span>
+        </div>
+
+        <div class="contact-row">
+            <span class="contact-name">Your Trusted Contact</span>
+            <span class="contact-number">Mom</span>
+        </div>
+    </div>
+
+    <!-- Info Box -->
+    <div class="info-box">
+        <p><strong>⚠️ Important:</strong> When you activate SOS, your real-time location will be sent to your emergency contacts and authorities. Your phone may ring at high volume to alert nearby people.</p>
+    </div>
+
+    <!-- SOS Form -->
+    <div class="sos-form-section">
+        <h2>Send Emergency Alert</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="location">📍 Current Location</label>
+                <input type="text" id="location" name="location" placeholder="Enter your current location or allow GPS to auto-detect" required>
+            </div>
+
+            <div class="form-group">
+                <label for="details">📝 Additional Details</label>
+                <textarea id="details" name="details" placeholder="Describe your situation (optional)"></textarea>
+            </div>
+
+            <div class="sos-button-group">
+                <button type="submit" class="btn-sos-send">🚨 SEND EMERGENCY ALERT</button>
+                <a href="/dashboard/" class="btn-back">← Back</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

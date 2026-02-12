@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .dashboard-container {
+        display: flex;
+        padding: 30px 0;
+        gap: 20px;
+    }
+
+    .left {
+        flex: 3;
+    }
+
+    .right {
+        flex: 1;
+    }
+
+    .welcome-card {
+        background: linear-gradient(90deg, #5f2eea, #8e2de2);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .stats {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .stat-card {
+        flex: 1;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .map-container {
+        margin-top: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    }
+
+    #map {
+        height: 350px;
+        border-radius: 10px;
+    }
+
+    .profile-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .profile-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #5f2eea;
+        color: white;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .activity {
+        margin-top: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .activity-item {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+
+    .dashboard-nav {
+        background: white;
+        border-bottom: 2px solid #f0f0f0;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .dashboard-nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .dashboard-nav li {
+        flex: 1;
+    }
+
+    .dashboard-nav a {
+        display: block;
+        padding: 16px 20px;
+        text-decoration: none;
+        color: #333;
+        text-align: center;
+        font-weight: 600;
+        transition: all 0.3s;
+        border-bottom: 3px solid transparent;
+    }
+
+    .dashboard-nav a:hover {
+        background: #f8f9ff;
+        color: #5f2eea;
+        border-bottom-color: #5f2eea;
+    }
+
+    .dashboard-nav a.active {
+        color: #5f2eea;
+        border-bottom-color: #5f2eea;
+        background: #f8f9ff;
+    }
+</style>
+
+<!-- Dashboard Navigation -->
+<div class="dashboard-nav">
+    <ul>
+        <li><a href="/dashboard/" class="active">📊 Dashboard</a></li>
+        <li><a href="/safe-trips/">🛣️ Safe Trips</a></li>
+        <li><a href="/safety-points/">⭐ Safety Points</a></li>
+        <li><a href="/profile/">👤 Profile</a></li>
+    </ul>
+</div>
+
+<div class="dashboard-container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+
+        <!-- Welcome Card -->
+        <div class="welcome-card">
+            <div>
+                <h2>Hello, {{ request.user.username }} 👋</h2>
+                <p>Here's your safety summary for today.</p>
+            </div>
+            <div>
+                <h3>18.4°C</h3>
+                <small>Clear</small>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <h2>4</h2>
+                <p>Total Trips</p>
+            </div>
+
+            <div class="stat-card">
+                <h2 style="color:green;">85%</h2>
+                <p>Safety Score</p>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-container">
+            <h3>Live Location</h3>
+            <div id="map"></div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="activity">
+            <h3>Recent Activity</h3>
+
+            <div class="activity-item">
+                Monitoring Active -  Hyderabad
+            </div>
+
+            <div class="activity-item">
+                Assistance Requested
+            </div>
+
+            <div class="activity-item">
+                Safe Route Suggested
+            </div>
+        </div>
+
+    </div>
+
+   <!-- RIGHT SIDE -->
+   <div class="right">
+
+    <!-- Profile Card -->
+    <a href="/profile/" style="text-decoration: none; color: inherit;">
+        <div class="profile-card" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;" 
+             onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 8px 20px rgba(0,0,0,0.15)';" 
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0px 4px 10px rgba(0,0,0,0.05)';">
+            <div class="profile-avatar">
+                {{ request.user.username|first|upper }}
+            </div>
+
+            <h3>{{ request.user.username }}</h3>
+            <p>Level 5 Traveler</p>
+            <p>📞 8919260434</p>
+            <p>📍 Narsampet</p>
+        </div>
+    </a>
+
+        <hr>
+
+        <div style="display:flex; justify-content:space-between;">
+            <div>
+                <h4>{{ profile.safe_trips }}</h4>
+                <small>Safe Trips</small>
+            </div>
+
+            <div>
+                <h4>{{ profile.safety_points }}</h4>
+                <small>Safety Points</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="profile-card" style="margin-top:20px;">
+        <h4>🚨 9959333504</h4>
+
+        {% for contact in contacts %}
+            <div style="margin-top:10px; padding:10px; background:#f4f6fb; border-radius:8px;">
+                <strong>{{ contact.name }}</strong><br>
+                📞 {{ contact.phone }}
+            </div>
+        {% empty %}
+            <p>No contacts added.</p>
+        {% endfor %}
+    </div>
+
+</div>
+<!-- Floating SOS Button -->
+<a href="/sos/" class="sos-btn" style="position: fixed; bottom: 30px; right: 30px; background: red; color: white; padding: 18px; border-radius: 50%; font-size: 16px; box-shadow: 0px 4px 15px rgba(255,0,0,0.5); text-decoration: none; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px;">SOS</a>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+var map = L.map('map').setView([17.3850, 78.4867], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'OpenStreetMap'
+}).addTo(map);
+
+navigator.geolocation.watchPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+
+    L.marker([lat, lon]).addTo(map)
+        .bindPopup("You are here")
+        .openPopup();
+});
+</script>
+
+{% endblock %}

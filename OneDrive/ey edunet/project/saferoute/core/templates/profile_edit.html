@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .edit-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .edit-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .edit-card h2 {
+        color: #5f2eea;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #5f2eea;
+        box-shadow: 0 0 0 3px rgba(95, 46, 234, 0.1);
+    }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .btn-save {
+        flex: 1;
+        background: linear-gradient(90deg, #5f2eea, #8e2de2);
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.3s;
+    }
+
+    .btn-save:hover {
+        opacity: 0.9;
+    }
+
+    .btn-cancel {
+        flex: 1;
+        background: #ddd;
+        color: #333;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+    }
+
+    .btn-cancel:hover {
+        background: #ccc;
+        text-decoration: none;
+        color: #333;
+    }
+</style>
+
+<div class="edit-container">
+
+    <a href="/profile/" style="text-decoration: none; color: #5f2eea; margin-bottom: 20px; display: inline-block;">← Back to Profile</a>
+
+    <div class="edit-card">
+        <h2>Edit Profile</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" value="{{ request.user.email }}" placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" value="{{ request.user.first_name }}" placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" value="{{ request.user.last_name }}" placeholder="Last Name">
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <a href="/profile/" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
