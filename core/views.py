@@ -47,7 +47,10 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
+            messages.success(request, f"Welcome back, {username}!")
             return redirect("dashboard")
+        else:
+            messages.error(request, "Invalid username or password.")
     return render(request, "login.html")
 
 
