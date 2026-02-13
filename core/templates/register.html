@@ -7,7 +7,7 @@
 
             <h3 class="text-center mb-4">Sign Up</h3>
 
-            <form method="POST">
+            <form method="POST" action="{% url 'register' %}">
                 {% csrf_token %}
 
                 <!-- Username -->
@@ -35,27 +35,16 @@
 
                 <!-- Confirm Password -->
                 <div class="mb-3">
-                    <label class="form-label">Password confirmation</label>
+                    <label class="form-label">Confirm Password</label>
                     <input type="password" name="password2" class="form-control" required>
                     <small class="form-text text-muted">
                         Enter the same password as before, for verification.
                     </small>
                 </div>
 
-                <!-- Full Name -->
-                <div class="mb-3">
-                    <label class="form-label">Full name</label>
-                    <input type="text" name="fullname" class="form-control">
-                </div>
-
-                <!-- Phone Number -->
-                <div class="mb-3">
-                    <label class="form-label">Phone number</label>
-                    <input type="text" name="phone" class="form-control">
-                </div>
-
                 <!-- Register Button -->
-                <button type="submit" class="btn btn-primary w-100" style="background: linear-gradient(90deg, #6a11cb, #2575fc); border: none;">
+                <button type="submit" class="btn btn-primary w-100"
+                    style="background: linear-gradient(90deg, #6a11cb, #2575fc); border: none; padding: 10px; font-weight: 500;">
                     Register
                 </button>
 
@@ -63,7 +52,7 @@
 
             <p class="text-center mt-3">
                 Already have an account?
-                <a href="/login/">Login here</a>
+                <a href="{% url 'login' %}">Login here</a>
             </p>
 
         </div>
