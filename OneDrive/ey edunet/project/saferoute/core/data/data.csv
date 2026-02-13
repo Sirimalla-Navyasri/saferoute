@@ -1,0 +1,4 @@
+from django.conf import settings
+from pathlib import path
+
+file_path = settings.BASE_DIR "core"/ "data" / "data.csv"
