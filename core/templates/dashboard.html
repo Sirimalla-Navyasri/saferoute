@@ -41,7 +41,7 @@
         padding: 20px;
         border-radius: 10px;
         text-align: center;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .map-container {
@@ -49,7 +49,7 @@
         background: white;
         padding: 15px;
         border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     #map {
@@ -62,7 +62,7 @@
         padding: 20px;
         border-radius: 12px;
         text-align: center;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .profile-avatar {
@@ -83,7 +83,7 @@
         background: white;
         padding: 15px;
         border-radius: 12px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .activity-item {
@@ -100,7 +100,7 @@
         border-bottom: 2px solid #f0f0f0;
         margin-bottom: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .dashboard-nav ul {
@@ -156,6 +156,10 @@
         <!-- Welcome Card -->
         <div class="welcome-card">
             <div>
+                <a href="{% url 'index' %}"
+                    style="background: rgba(255, 255, 255, 0.2); color: white; text-decoration: none; font-size: 13px; padding: 6px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.4); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); transition: all 0.3s; font-weight: 500;">
+                    <span style="font-size: 16px;">←</span> Back to Home
+                </a>
                 <h2>Hello, {{ request.user.username }} 👋</h2>
                 <p>Here's your safety summary for today.</p>
             </div>
@@ -189,7 +193,7 @@
             <h3>Recent Activity</h3>
 
             <div class="activity-item">
-                Monitoring Active -  Hyderabad
+                Monitoring Active - Hyderabad
             </div>
 
             <div class="activity-item">
@@ -203,24 +207,24 @@
 
     </div>
 
-   <!-- RIGHT SIDE -->
-   <div class="right">
+    <!-- RIGHT SIDE -->
+    <div class="right">
 
-    <!-- Profile Card -->
-    <a href="/profile/" style="text-decoration: none; color: inherit;">
-        <div class="profile-card" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;" 
-             onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 8px 20px rgba(0,0,0,0.15)';" 
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0px 4px 10px rgba(0,0,0,0.05)';">
-            <div class="profile-avatar">
-                {{ request.user.username|first|upper }}
+        <!-- Profile Card -->
+        <a href="/profile/" style="text-decoration: none; color: inherit;">
+            <div class="profile-card" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;"
+                onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0px 8px 20px rgba(0,0,0,0.15)';"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0px 4px 10px rgba(0,0,0,0.05)';">
+                <div class="profile-avatar">
+                    {{ request.user.username|first|upper }}
+                </div>
+
+                <h3>{{ request.user.username }}</h3>
+                <p>Level 5 Traveler</p>
+                <p>📞 8919260434</p>
+                <p>📍 Narsampet</p>
             </div>
-
-            <h3>{{ request.user.username }}</h3>
-            <p>Level 5 Traveler</p>
-            <p>📞 8919260434</p>
-            <p>📍 Narsampet</p>
-        </div>
-    </a>
+        </a>
 
         <hr>
 
@@ -242,40 +246,41 @@
         <h4>🚨 9959333504</h4>
 
         {% for contact in contacts %}
-            <div style="margin-top:10px; padding:10px; background:#f4f6fb; border-radius:8px;">
-                <strong>{{ contact.name }}</strong><br>
-                📞 {{ contact.phone }}
-            </div>
+        <div style="margin-top:10px; padding:10px; background:#f4f6fb; border-radius:8px;">
+            <strong>{{ contact.name }}</strong><br>
+            📞 {{ contact.phone }}
+        </div>
         {% empty %}
-            <p>No contacts added.</p>
+        <p>No contacts added.</p>
         {% endfor %}
     </div>
 
 </div>
 <!-- Floating SOS Button -->
-<a href="/sos/" class="sos-btn" style="position: fixed; bottom: 30px; right: 30px; background: red; color: white; padding: 18px; border-radius: 50%; font-size: 16px; box-shadow: 0px 4px 15px rgba(255,0,0,0.5); text-decoration: none; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px;">SOS</a>
+<a href="/sos/" class="sos-btn"
+    style="position: fixed; bottom: 30px; right: 30px; background: red; color: white; padding: 18px; border-radius: 50%; font-size: 16px; box-shadow: 0px 4px 15px rgba(255,0,0,0.5); text-decoration: none; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px;">SOS</a>
 
 <!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-var map = L.map('map').setView([17.3850, 78.4867], 13);
+    var map = L.map('map').setView([17.3850, 78.4867], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'OpenStreetMap'
-}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'OpenStreetMap'
+    }).addTo(map);
 
-navigator.geolocation.watchPosition(function(position) {
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
+    navigator.geolocation.watchPosition(function (position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
 
-    L.marker([lat, lon]).addTo(map)
-        .bindPopup("You are here")
-        .openPopup();
-});
+        L.marker([lat, lon]).addTo(map)
+            .bindPopup("You are here")
+            .openPopup();
+    });
 </script>
 
 {% endblock %}

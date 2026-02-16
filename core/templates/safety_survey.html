@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .survey-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .survey-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .survey-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+    }
+
+    .question-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .question-section:last-child {
+        border-bottom: none;
+    }
+
+    .question-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 16px;
+        display: block;
+    }
+
+    .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 10px 0;
+    }
+
+    .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .radio-option input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .radio-option label {
+        cursor: pointer;
+        margin: 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .btn-submit {
+        width: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .btn-submit:hover {
+        opacity: 0.9;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #667eea;
+    }
+</style>
+
+<div class="survey-container">
+    <div class="survey-header">
+        <h1>🛡️ Safety Experience Survey</h1>
+        <p>Help other women stay safe by sharing your experience on this route</p>
+        <p style="font-size: 14px; opacity: 0.9; margin-top: 10px;">Route: <strong>{{ trip.route_name }}</strong></p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="survey-card">
+            <div class="section-title">📍 Route Information</div>
+
+            <div class="question-section">
+                <label class="question-label">Route Name</label>
+                {{ form.route_name }}
+            </div>
+
+            <div class="question-section">
+                <label class="question-label">⏰ When did you travel on this route?</label>
+                <div class="radio-group">
+                    {% for choice in form.time_of_travel %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="survey-card">
+            <div class="section-title">💡 Lighting & Crowd Assessment</div>
+
+            <div class="question-section">
+                <label class="question-label">How well-lit was the route?</label>
+                <div class="radio-group">
+                    {% for choice in form.lighting_rating %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="question-section">
+                <label class="question-label">How crowded was the route?</label>
+                <div class="radio-group">
+                    {% for choice in form.crowd_level %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="survey-card">
+            <div class="section-title">⚠️ Safety Incidents</div>
+
+            <div class="question-section">
+                <label class="question-label">Did you experience any harassment?</label>
+                <div class="radio-group">
+                    {% for choice in form.experienced_harassment %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {{ form.harassment_details }}
+            </div>
+
+            <div class="question-section">
+                <label class="question-label">Did you experience catcalling or teasing?</label>
+                <div class="radio-group">
+                    {% for choice in form.experienced_teasing %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {{ form.teasing_details }}
+            </div>
+
+            <div class="question-section">
+                <label class="question-label">Did you feel unsafe at any point?</label>
+                <div class="radio-group">
+                    {% for choice in form.felt_unsafe %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {{ form.unsafe_details }}
+            </div>
+        </div>
+
+        <div class="survey-card">
+            <div class="section-title">⭐ Overall Safety Rating</div>
+
+            <div class="question-section">
+                <label class="question-label">Overall, how safe did you feel on this route?</label>
+                <div class="radio-group">
+                    {% for choice in form.overall_safety_rating %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="question-section">
+                <label class="question-label">Additional Comments or Suggestions</label>
+                {{ form.additional_comments }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Safety Survey</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'safe_trips' %}" style="color: #666; text-decoration: none;">← Back to Safe Trips</a>
+    </div>
+</div>
+
+{% endblock %}

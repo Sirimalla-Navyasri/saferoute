@@ -5,7 +5,7 @@
 
 <style>
     .sos-container {
-        max-width: 700px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 40px 20px;
     }
@@ -13,278 +13,391 @@
     .sos-warning {
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
         color: white;
-        padding: 60px 40px;
+        padding: 40px;
         border-radius: 12px;
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
     }
 
     .sos-icon {
-        font-size: 80px;
-        margin-bottom: 20px;
-        animation: pulse 1s infinite;
+        font-size: 60px;
+        margin-bottom: 15px;
+        animation: pulse 1.5s infinite;
     }
 
     @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
     }
 
     .sos-warning h1 {
-        font-size: 42px;
-        margin-bottom: 15px;
+        font-size: 32px;
+        margin-bottom: 10px;
         font-weight: bold;
     }
 
     .sos-warning p {
-        font-size: 18px;
+        font-size: 16px;
         opacity: 0.95;
-        margin-bottom: 10px;
+        margin-bottom: 0;
     }
 
-    .emergency-contacts {
+    .grid-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .grid-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .sos-card {
         background: white;
-        padding: 40px;
+        padding: 30px;
         border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        height: 100%;
     }
 
-    .emergency-contacts h2 {
-        color: #ff6b6b;
-        margin-bottom: 30px;
-        font-size: 24px;
+    .sos-card h2 {
+        color: #333;
+        margin-bottom: 25px;
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
-    .contact-row {
+    .contact-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px;
-        border-bottom: 1px solid #eee;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
         margin-bottom: 10px;
+        transition: all 0.2s;
     }
 
-    .contact-row:last-child {
-        border-bottom: none;
+    .contact-item:hover {
+        background: #f1f3f5;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
     }
 
     .contact-name {
         font-weight: 600;
         color: #333;
-        font-size: 16px;
     }
 
-    .contact-number {
+    .contact-phone {
+        font-size: 14px;
         color: #ff6b6b;
+    }
+
+    .btn-delete {
+        color: #adb5bd;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
         font-size: 18px;
-        font-weight: bold;
+        transition: color 0.2s;
     }
 
-    .sos-form-section {
-        background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        margin-bottom: 40px;
-    }
-
-    .sos-form-section h2 {
-        color: #333;
-        margin-bottom: 30px;
-        font-size: 24px;
+    .btn-delete:hover {
+        color: #fa5252;
     }
 
     .form-group {
-        margin-bottom: 25px;
+        margin-bottom: 15px;
     }
 
     .form-group label {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         font-weight: 600;
-        color: #333;
+        color: #555;
+        font-size: 14px;
     }
 
     .form-group input,
     .form-group textarea {
         width: 100%;
-        padding: 12px;
-        border: 2px solid #ddd;
+        padding: 10px;
+        border: 2px solid #eee;
         border-radius: 8px;
-        font-size: 16px;
-        font-family: 'Poppins', sans-serif;
-        box-sizing: border-box;
+        font-size: 15px;
         transition: border-color 0.3s;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
+    .form-group input:focus {
         outline: none;
         border-color: #ff6b6b;
-        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
     }
 
-    .form-group textarea {
-        resize: vertical;
-        min-height: 100px;
+    .btn-add {
+        width: 100%;
+        background: #ff6b6b;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 10px;
     }
 
-    .sos-button-group {
-        display: flex;
-        gap: 15px;
-        margin-top: 30px;
-    }
-
-    .btn-sos-send {
-        flex: 1;
+    .btn-sos {
+        width: 100%;
         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
         color: white;
-        padding: 16px 30px;
+        padding: 15px;
         border: none;
         border-radius: 8px;
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
-        transition: all 0.3s;
         box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
     }
 
-    .btn-sos-send:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-    }
-
-    .btn-sos-send:active {
-        transform: translateY(0);
-    }
-
-    .btn-back {
-        flex: 1;
-        background: #f0f0f0;
-        color: #333;
-        padding: 16px 30px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.3s;
-    }
-
-    .btn-back:hover {
-        background: #e0e0e0;
-        text-decoration: none;
-        color: #333;
-    }
-
-    .success-message {
-        background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 30px;
-        font-size: 16px;
-        text-align: center;
-        font-weight: 600;
-    }
-
-    .info-box {
-        background: #f8f9ff;
+    .info-alert {
+        background: #fff5f5;
         border-left: 4px solid #ff6b6b;
-        padding: 20px;
+        padding: 15px;
         border-radius: 8px;
-        margin-bottom: 30px;
+        margin-top: 20px;
+        font-size: 14px;
+        color: #555;
     }
 
-    .info-box p {
+    .public-contacts {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    .public-contacts h3 {
+        font-size: 16px;
         color: #666;
-        margin: 0;
-        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        background: #e9ecef;
+        margin-right: 5px;
+        margin-bottom: 5px;
     }
 </style>
 
 <div class="sos-container">
 
-    <!-- SOS Warning Header -->
+    <!-- Header -->
     <div class="sos-warning">
+        <a href="{% url 'dashboard' %}"
+            style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; margin-bottom: 10px; display: inline-block;">←
+            Back to Dashboard</a>
         <div class="sos-icon">🚨</div>
         <h1>Emergency SOS</h1>
-        <p>Your safety is our top priority</p>
-        <p style="opacity: 0.8; font-size: 14px;">Activate this only in case of emergency</p>
+        <p>Stay safe, share your location instantly.</p>
     </div>
 
-    <!-- Success Message -->
-    {% if message %}
-    <div class="success-message">
-        ✓ {{ message }}
-    </div>
-    {% endif %}
+    <div class="grid-layout">
 
-    <!-- Emergency Contacts -->
-    <div class="emergency-contacts">
-        <h2>📞 Emergency Contacts</h2>
-        
-        <div class="contact-row">
-            <span class="contact-name">Police Emergency</span>
-            <span class="contact-number">100</span>
-        </div>
+        <!-- Left: Contacts Management -->
+        <div class="sos-card">
+            <h2>👥 My Emergency Contacts</h2>
 
-        <div class="contact-row">
-            <span class="contact-name">Women Helpline</span>
-            <span class="contact-number">1091</span>
-        </div>
+            {% for contact in contacts %}
+            <div class="contact-item">
+                <div class="contact-info">
+                    <span class="contact-name">{{ contact.name }}</span>
+                    <span class="contact-phone">{{ contact.phone }}</span>
+                </div>
+                <a href="{% url 'delete_contact' contact.id %}" class="btn-delete" title="Remove Contact">×</a>
+            </div>
+            {% empty %}
+            <p style="text-align: center; color: #999; margin: 20px 0;">You haven't added any personal contacts yet.</p>
+            {% endfor %}
 
-        <div class="contact-row">
-            <span class="contact-name">Ambulance</span>
-            <span class="contact-number">102</span>
-        </div>
-
-        <div class="contact-row">
-            <span class="contact-name">Fire Department</span>
-            <span class="contact-number">101</span>
-        </div>
-
-        <div class="contact-row">
-            <span class="contact-name">Your Trusted Contact</span>
-            <span class="contact-number">Mom</span>
-        </div>
-    </div>
-
-    <!-- Info Box -->
-    <div class="info-box">
-        <p><strong>⚠️ Important:</strong> When you activate SOS, your real-time location will be sent to your emergency contacts and authorities. Your phone may ring at high volume to alert nearby people.</p>
-    </div>
-
-    <!-- SOS Form -->
-    <div class="sos-form-section">
-        <h2>Send Emergency Alert</h2>
-
-        <form method="POST">
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label for="location">📍 Current Location</label>
-                <input type="text" id="location" name="location" placeholder="Enter your current location or allow GPS to auto-detect" required>
+            <div style="margin-top: 30px;">
+                <h3 style="font-size: 16px; margin-bottom: 15px;">➕ Add New Contact</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        {{ form.phone }}
+                    </div>
+                    <button type="submit" class="btn-add">Save Contact</button>
+                </form>
             </div>
 
-            <div class="form-group">
-                <label for="details">📝 Additional Details</label>
-                <textarea id="details" name="details" placeholder="Describe your situation (optional)"></textarea>
+            <!-- Emergency Resources -->
+            <div class="public-contacts">
+                <h3>� Emergency Helplines</h3>
+                <div class="contact-item" style="background: #fff9db;">
+                    <div class="contact-info">
+                        <span class="contact-name">🚔 Police Emergency</span>
+                        <span class="contact-phone" style="color: #f08c00;">100</span>
+                    </div>
+                    <a href="tel:100" style="color: #f08c00; text-decoration: none; font-weight: bold;">Call</a>
+                </div>
+                <div class="contact-item" style="background: #fff0f6;">
+                    <div class="contact-info">
+                        <span class="contact-name">👩 Women Helpline</span>
+                        <span class="contact-phone" style="color: #d6336c;">1091</span>
+                    </div>
+                    <a href="tel:1091" style="color: #d6336c; text-decoration: none; font-weight: bold;">Call</a>
+                </div>
+                <div class="contact-item" style="background: #e7f5ff;">
+                    <div class="contact-info">
+                        <span class="contact-name">🚑 Ambulance</span>
+                        <span class="contact-phone" style="color: #1971c2;">108</span>
+                    </div>
+                    <a href="tel:108" style="color: #1971c2; text-decoration: none; font-weight: bold;">Call</a>
+                </div>
+                <div class="contact-item" style="background: #f3f0ff;">
+                    <div class="contact-info">
+                        <span class="contact-name">🆘 National Emergency</span>
+                        <span class="contact-phone" style="color: #7950f2;">112</span>
+                    </div>
+                    <a href="tel:112" style="color: #7950f2; text-decoration: none; font-weight: bold;">Call</a>
+                </div>
+                <div class="contact-item" style="background: #fff5f5;">
+                    <div class="contact-info">
+                        <span class="contact-name">🩺 Domestic Violence Helpline</span>
+                        <span class="contact-phone" style="color: #c92a2a;">181</span>
+                    </div>
+                    <a href="tel:181" style="color: #c92a2a; text-decoration: none; font-weight: bold;">Call</a>
+                </div>
             </div>
 
-            <div class="sos-button-group">
-                <button type="submit" class="btn-sos-send">🚨 SEND EMERGENCY ALERT</button>
-                <a href="/dashboard/" class="btn-back">← Back</a>
+            <!-- Safe Places Nearby -->
+            <div class="public-contacts">
+                <h3>📍 Find Nearby Safe Places</h3>
+                <div class="info-alert" style="margin-top: 0;">
+                    <strong>If you feel unsafe, immediately go to:</strong>
+                </div>
+                <div class="contact-item" style="background: #e3fafc;">
+                    <div class="contact-info">
+                        <span class="contact-name">🏥 Nearest Hospital</span>
+                        <span style="font-size: 12px; color: #666;">24/7 safe public place with security</span>
+                    </div>
+                </div>
+                <div class="contact-item" style="background: #e3fafc;">
+                    <div class="contact-info">
+                        <span class="contact-name">🚔 Police Station</span>
+                        <span style="font-size: 12px; color: #666;">Report incidents immediately</span>
+                    </div>
+                </div>
+                <div class="contact-item" style="background: #e3fafc;">
+                    <div class="contact-info">
+                        <span class="contact-name">🏪 24/7 Stores (Pharmacy, Gas Station)</span>
+                        <span style="font-size: 12px; color: #666;">Well-lit with CCTV cameras</span>
+                    </div>
+                </div>
+                <div class="contact-item" style="background: #e3fafc;">
+                    <div class="contact-info">
+                        <span class="contact-name">🏨 Hotels/Restaurants</span>
+                        <span style="font-size: 12px; color: #666;">Public places with staff present</span>
+                    </div>
+                </div>
+                <div class="contact-item" style="background: #e3fafc;">
+                    <div class="contact-info">
+                        <span class="contact-name">🏦 ATM Centers (Bank premises)</span>
+                        <span style="font-size: 12px; color: #666;">Monitored with security cameras</span>
+                    </div>
+                </div>
             </div>
-        </form>
+
+            <!-- Safety Tips -->
+            <div class="public-contacts">
+                <h3>💡 Immediate Safety Actions</h3>
+                <div style="font-size: 13px; line-height: 1.8; color: #555;">
+                    <div style="padding: 8px 0; border-bottom: 1px solid #f1f3f5;">
+                        1️⃣ <strong>Call emergency helpline</strong> - Don't hesitate
+                    </div>
+                    <div style="padding: 8px 0; border-bottom: 1px solid #f1f3f5;">
+                        2️⃣ <strong>Share live location</strong> with trusted contacts
+                    </div>
+                    <div style="padding: 8px 0; border-bottom: 1px solid #f1f3f5;">
+                        3️⃣ <strong>Move to crowded area</strong> - Avoid isolation
+                    </div>
+                    <div style="padding: 8px 0; border-bottom: 1px solid #f1f3f5;">
+                        4️⃣ <strong>Make noise</strong> - Attract attention if needed
+                    </div>
+                    <div style="padding: 8px 0;">
+                        5️⃣ <strong>Trust your instincts</strong> - Your safety first
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Action Section -->
+        <div class="sos-card">
+            <h2>🆘 Trigger Alert</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>📍 Your Current Location</label>
+                    <input type="text" name="location" id="location-input" placeholder="Loading location..." required>
+                </div>
+
+                <div class="info-alert">
+                    <strong>⚠️ Important:</strong> Clicking the button below will send your exact GPS location to all
+                    your saved contacts and local emergency services.
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <button type="submit" class="btn-sos">🚨 ACTIVATE SOS</button>
+                </div>
+            </form>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <a href="{% url 'dashboard' %}" style="color: #666; text-decoration: none; font-size: 14px;">← Back to
+                    Dashboard</a>
+            </div>
+        </div>
+
     </div>
-
 </div>
+
+<script>
+    // Simple Geolocation Auto-fill
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            document.getElementById('location-input').value = lat.toFixed(4) + ", " + lng.toFixed(4);
+        }, function (error) {
+            document.getElementById('location-input').placeholder = "Enter location manually";
+        });
+    } else {
+        document.getElementById('location-input').placeholder = "Enter location manually";
+    }
+</script>
 
 {% endblock %}
