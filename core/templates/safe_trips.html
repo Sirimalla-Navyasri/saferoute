@@ -114,6 +114,18 @@
         color: #856404;
     }
 
+    .text-safe {
+        color: #155724;
+    }
+
+    .text-warning {
+        color: #856404;
+    }
+
+    .text-danger {
+        color: #721c24;
+    }
+
     .trip-details {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -608,7 +620,7 @@
                     {{ fb.suggested_alternative }}
                 </div>
             </div>
-            {% endwith %}
+
             {% empty %}
             <div class="empty-state" style="padding: 30px;">
                 <p>No community suggestions yet. Be the first to help!</p>
@@ -658,16 +670,22 @@
             <div class="trip-detail-item">
                 <strong>🎯 Safety Score</strong>
                 <span
-                    style="font-weight: bold; color: {% if trip.safety_score >= 80 %}#155724{% elif trip.safety_score >= 60 %}#856404{% else %}#721c24{% endif %};">
+                    class="{% if trip.safety_score|default:0|add:0 >= 80 %}text-safe{% elif trip.safety_score|default:0|add:0 >= 60 %}text-warning{% else %}text-danger{% endif %}"
+                    style="font-weight: bold;">
+                    {% if trip.safety_score|default:0|add:0 >= 80 %}
+                    ✅ Safe Route Suggestion
+                    {% else %}
+                    ⚠️ Potential Dangers Identified
+                    {% endif %}
                     {{ trip.safety_score }}%
                 </span>
             </div>
         </div>
 
         <!-- Safety Analysis Report -->
-        <div class="safety-report {% if trip.safety_score >= 80 %}safe{% endif %}">
+        <div class="safety-report {% if trip.safety_score|default:0|add:0 >= 80 %}safe{% endif %}">
             <div class="danger-tag">
-                {% if trip.safety_score >= 80 %}
+                {% if trip.safety_score|default:0|add:0 >= 80 %}
                 ✅ Safe Route Suggestion
                 {% else %}
                 ⚠️ Potential Dangers Identified
